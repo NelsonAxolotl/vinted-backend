@@ -20,7 +20,7 @@ cloudinary.config({
 // Les modèles:
 const User =require("./models/User");
 const Offer=require("./models/Offer");
-const isAuthenticated=require("./middlewares/isAuthenticated");
+
 
 //Import des routes user
 const userRoutes=require("./routes/user");
@@ -28,10 +28,6 @@ app.use(userRoutes);
 
 const offerRoutes =require("./routes/offer");
 app.use(offerRoutes);
-
-const convertToBase64 = (file) => {
-    return `data:${file.mimetype};base64,${file.data.toString("base64")}`;
-};
 
 
 app.get("/", (req, res) => {

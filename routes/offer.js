@@ -62,7 +62,7 @@ router.post("/offer/publish", isAuthenticated, fileUpload(), async (req, res) =>
 
 });
 
-router.get("/offers", async (req, res) => {
+router.get("/offer", async (req, res) => {
     try {
         //console.log(req.query);
         // const title = req.query.title;
