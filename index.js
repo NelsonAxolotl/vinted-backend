@@ -4,7 +4,6 @@ const cors = require("cors");
 const app = express();
 const mongoose = require("mongoose");
 const cloudinary = require("cloudinary").v2;
-const encBase64 = require("crypto-js/enc-base64");
 
 app.use(cors());
 app.use(express.json());
