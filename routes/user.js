@@ -63,9 +63,7 @@ router.post("/user/signup", async (req, res) => {
 router.post("/user/login", async (req, res) => {
   try {
     console.log(req.body);
-    if (!email || !password) {
-      return res.status(400).json("Missing parameters");
-    }
+
     // je  récupére le salt et la hash du user correspondant au mail :
     //je cherche un utilisateur dont la clé email correspond à l'email que j'ai reçu.
     const userFound = await User.findOne({ email: req.body.email });
