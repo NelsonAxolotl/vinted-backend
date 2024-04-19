@@ -22,19 +22,6 @@ router.post(
       const { title, description, price, condition, city, brand, size, color } =
         req.body;
       const picture = req.files.picture;
-      if (
-        !title ||
-        !description ||
-        !price ||
-        !condition ||
-        !city ||
-        !brand ||
-        !city ||
-        !size ||
-        !color
-      ) {
-        return res.status(400).json("Missing parameters");
-      }
 
       const newOffer = new Offer({
         product_name: title,
