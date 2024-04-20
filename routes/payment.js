@@ -20,10 +20,28 @@ router.post("/payment", async (req, res) => {
     // Le paiement a fonctionné
     // On peut mettre à jour la base de données
     // On renvoie une réponse au client pour afficher un message de statut
-    res.json(paymentIntent);
+    // Si la confirmation du paiement est réussie
+    if (paymentIntent.status === "succeeded") {
+      // Mettre à jour la base de données si nécessaire
+      // Renvoyer une réponse au client avec le statut de réussite
+      res.status(200).json({ message: "Paiement réussi", status: "succeeded" });
+    } else {
+      // Si la confirmation du paiement échoue, renvoyer une réponse avec le statut correspondant
+      res
+        .status(400)
+        .json({
+          message: "Échec de la confirmation du paiement",
+          status: "failed",
+        });
+    }
   } catch (error) {
     console.log(error.message);
-    res.status(500).json({ message: error.message });
+    res
+      .status(500)
+      .json({
+        message: "Erreur lors du traitement du paiement",
+        error: error.message,
+      });
   }
 });
 
