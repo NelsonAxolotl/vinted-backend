@@ -96,21 +96,27 @@ router.get("/offers", async (req, res) => {
       sort.product_price = "asc"; // 1
     }
 
-    let limit = 10;
-
-    if (req.query.limit) {
-      limit = req.query.limit;
+    let page;
+    // Si le query page n'est pas un nombre >= à 1
+    if (Number(req.query.page) < 1) {
+      // page sera par défaut à 1
+      page = 1;
+    } else {
+      // Sinon page sera égal au query reçu
+      page = Number(req.query.page);
     }
-    let page = 1;
+    // La variable limit sera égale au query limit reçu
+    let limit = Number(req.query.limit);
 
-    if (req.query.page) {
-      page = req.query.page;
-    }
     const skip = (page - 1) * limit;
 
     const results = await Offer.find(filters)
+      .populate({
+        path: "owner",
+        select: "account",
+      })
       .sort(sort)
-      .skip(skip)
+      .skip((page - 1) * limit)
       .limit(limit);
 
     const count = await Offer.countDocuments(filters);
