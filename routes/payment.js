@@ -16,7 +16,6 @@ router.post("/payment", async (req, res) => {
       currency: "eur",
       // Description du produit
       description: `Paiement vinted pour : ${req.body.title}`,
-      source: req.body.token,
     });
     // Le paiement a fonctionné
     // On peut mettre à jour la base de données
