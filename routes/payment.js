@@ -29,27 +29,11 @@ router.post("/payment", async (req, res) => {
     //   // Si la confirmation du paiement échoue, renvoyer une réponse avec le statut correspondant
     //   res.status(400).json({ message: "Échec de la confirmation du paiement", status: "failed" });
     // }
-    if (paymentIntent.status === "succeeded") {
-      // Mettre à jour la base de données si nécessaire
-      // Envoyer une réponse au client avec le statut de réussite
-      res.status(200).json({ message: "Paiement réussi", status: "succeeded" });
-    } else {
-      // Envoyer une réponse au client avec le statut d'échec
-      res
-        .status(400)
-        .json({
-          message: "Échec de la confirmation du paiement",
-          status: "failed",
-        });
-    }
+    res.json(paymentIntent);
   } catch (error) {
     console.log(error.message);
-    res
-      .status(500)
-      .json({
-        message: "Erreur lors du traitement du paiement",
-        error: error.message,
-      });
+    res.status(500).json({ message: error.message });
   }
 });
+
 module.exports = router;
